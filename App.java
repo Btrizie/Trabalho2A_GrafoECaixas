@@ -11,7 +11,7 @@ public class App{
         int longestSequence = findLongestNestingSequence(boxes);
         System.out.println("The longest nesting sequence length is: " + longestSequence);
     }
-
+    
     //método que ordena e cataloga as dimensões
     public static List<int[]> readBoxes(String fileName) {
         List<int[]> boxes = new ArrayList<>();
@@ -36,7 +36,7 @@ public class App{
         return boxes;
     }
 
-    //ARRUMAR!! --> esse método define as conexões do grafo
+    //Esse método compara todas as medidas já em ordem
     public static boolean canNest(int[] box1, int[] box2) {
         return box1[0] < box2[0] && box1[1] < box2[1] && box1[2] < box2[2];
     }
@@ -46,7 +46,8 @@ public class App{
         int n = boxes.size();
         
         //Inicializa o grafo
-        //ARRUMAR!! --> não sei se é assim que ela quer que inicialize
+        //ARRUMAR!! --> mudar para a classe Graph
+        //Graph G = new Graph(4) -> descobrir como importa
         Map<Integer, List<Integer>> graph = new HashMap<>();
         for (int i = 0; i < n; i++) {
             graph.put(i, new ArrayList<>());
@@ -54,11 +55,19 @@ public class App{
 
         //Adiciona as caixas no grafo
         for (int i = 0; i < n; i++) {
+            int contador = 0;
             for (int j = 0; j < n; j++) {
                 if (i != j && canNest(boxes.get(i), boxes.get(j))) {
+                    //falta uma caixa, por algum motivo
+                    System.out.println("A caixa de dimensões: " + Arrays.toString(boxes.get(i)));
+                    System.out.println("Cabe dentro da caixa"+j+": " + Arrays.toString(boxes.get(j)));
+                    
                     graph.get(i).add(j);
+                    contador++;
                 }
             }
+            System.out.println(contador);
+            System.out.println("---------");
         }
 
         //Encontra o caminho mais longo no grafo
@@ -73,7 +82,7 @@ public class App{
         return maxSequenceLength;
     }
 
-    //ARRUMAR!! --> Nâo sei kkk
+    //ARRUMAR!! --> Não é esse método que temos que usar
     public static int dfs(Map<Integer, List<Integer>> graph, int node, int[] memo) {
         if (memo[node] != -1) {
             return memo[node];
