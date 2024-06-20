@@ -5,7 +5,7 @@ public class App {
 
     public static void main(String[] args) throws FileNotFoundException {
         // pegar a file com as dimensões
-        String fileName = "catalogo.txt";
+        String fileName = "testeG.txt";
         // dicionario com as dimensões
         List<int[]> boxes = readBoxes(fileName);
         // acha a maior sequência
@@ -61,16 +61,22 @@ public class App {
             System.out.println("------");
         }
 
-        // Encontra o caminho mais longo no grafo
-        int[] memo = new int[n];
-        Arrays.fill(memo, -1);
+        // Encontra o caminho mais longo no grafo utilizando a classe DephtFirstSearch
         int maxSequenceLength = 0;
-
         for (int i = 0; i < n; i++) {
-            maxSequenceLength = Math.max(maxSequenceLength, dfs(graph, i, memo));
+            DepthFirstSearch16 dfs = new DepthFirstSearch16(graph, i);
+            for (int j = 0; j < n; j++) {
+                if (dfs.hasPathTo(j)) {
+                    ArrayList<Integer> path = dfs.pathTo(j);
+                    if (path != null && path.size() > maxSequenceLength) {
+                        maxSequenceLength = path.size();
+                    }
+                }
+            }
         }
         return maxSequenceLength;
     }
+
 
     // Método de busca em profundidade (DFS)
     public static int dfs(Digraph graph, int node, int[] memo) {
