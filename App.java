@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class App{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         //pegar a file com as dimensões
         String fileName = "catalogo.txt"; 
         //dicionario com as dimensões
@@ -13,25 +13,22 @@ public class App{
     }
     
     //método que ordena e cataloga as dimensões
-    public static List<int[]> readBoxes(String fileName) {
+    public static List<int[]> readBoxes(String fileName) throws FileNotFoundException {
+        File myObj = new File(fileName);
+        Scanner myReader = new Scanner(myObj);
+
+        //lista que quarda as dimensões das caixas
         List<int[]> boxes = new ArrayList<>();
-        //ARRUMAR!! --> Bufferreader???
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(" ");
-                int[] dimensions = new int[3];
-                for (int i = 0; i < 3; i++) {
-                    dimensions[i] = Integer.parseInt(parts[i]);
-                }
-                //ordena as dimensões da caixa
-                Arrays.sort(dimensions);
-                //adiciona no dicionário
-                boxes.add(dimensions);
+        while (myReader.hasNextLine()) {
+            String[] parts = myReader.nextLine().split(" ");
+            int[] dimensions = new int[3];
+            for (int i = 0; i < 3; i++) {
+                dimensions[i] = Integer.parseInt(parts[i]);
             }
-        //ARRUMAR!! --> arrumar o print da exception
-        } catch (IOException e) {
-            e.printStackTrace();
+            //ordena as dimensões da caixa
+            Arrays.sort(dimensions);
+            //adiciona no dicionário
+            boxes.add(dimensions);
         }
         return boxes;
     }
