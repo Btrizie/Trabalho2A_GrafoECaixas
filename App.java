@@ -78,23 +78,6 @@ public class App {
     }
 
 
-    // Método de busca em profundidade (DFS)
-    public static int dfs(Digraph graph, int node, int[] memo) {
-        if (memo[node] != -1) {
-            return memo[node];
-        }
-
-        // O comprimento mínimo é 1 (a própria caixa)
-        int maxLength = 1;
-        for (int neighbor : graph.adj(node)) {
-            maxLength = Math.max(maxLength, 1 + dfs(graph, neighbor, memo));
-        }
-
-        memo[node] = maxLength;
-        return maxLength;
-    }
-
-    // Método para exibir o grafo no formato DOT
     public static void showGraph(List<int[]> boxes) {
         int n = boxes.size();
         Digraph graph = new Digraph(n);
@@ -109,6 +92,7 @@ public class App {
         }
 
         // Exibir o grafo no formato DOT
+        //Acessar o site http://www.webgraphviz.com/
         String dotRepresentation = graph.toDot();
         System.out.println(dotRepresentation);
     }
