@@ -23,16 +23,17 @@ public class App2 {
                 // adiciona na lista
                 boxes.put(id++, dimensions);
             }
+            myReader.close();
             return boxes;
         }
 
         // Esse método compara todas as medidas, já ordenadas
-        public static boolean fitsBox (int[] box1, int[] box2) {
+        public static boolean ifFits(int[] box1, int[] box2) {
             return box1[0] < box2[0] && box1[1] < box2[1] && box1[2] < box2[2];
         }
 
         // Acha a maior sequência, assim como adiciona as caixas no grafo e faz sua representação.
-        public static int depht(Map<Integer, int[]> boxes) {
+        public static int depthGraph(Map<Integer, int[]> boxes) {
             int n = boxes.size();
 
             // Inicializa o grafo
@@ -40,9 +41,9 @@ public class App2 {
 
             // Adiciona as caixas no grafo
             for (int i = 0; i < n; i++) {
-                System.out.println("A caixa de dimensões: " + Arrays.toString(boxes.get(i)));
+                System.out.println("A caixa "+i+" de dimensões: " + Arrays.toString(boxes.get(i)));
                 for (int j = 0; j < n; j++) {
-                    if (i != j && fitsBox(boxes.get(i), boxes.get(j))) {
+                    if (i != j && ifFits(boxes.get(i), boxes.get(j))) {
                         System.out.println("Cabe dentro da caixa "+j+": " + Arrays.toString(boxes.get(j)));
                         graph.addEdge(i, j);
                     }
@@ -52,20 +53,20 @@ public class App2 {
             //Apresenta o grafo e suas relações
             printGraph(graph);
 
-            // Encontra o caminho mais longo no grafo utilizando a classe DephtFirstSearch
-            int maxSequenceLength = 0;
+            // Encontra o caminho mais longo no grafo utilizando a classe DephtGdepthGraphFirstSearch
+            int maxSequenceL = 0;
             for (int i = 0; i < n; i++) {
-                DepthFirstSearch16 dfs = new DepthFirstSearch16(graph, i);
+                DepthFirstSearch dfs = new DepthFirstSearch(graph, i);
                 for (int j = 0; j < n; j++) {
                     if (dfs.hasPathTo(j)) {
                         ArrayList<Integer> path = dfs.pathTo(j);
-                        if (path != null && path.size() > maxSequenceLength) {
-                            maxSequenceLength = path.size();
+                        if (path != null && path.size() > maxSequenceL) {
+                            maxSequenceL = path.size();
                         }
                     }
                 }
             }
-            return maxSequenceLength;
+            return maxSequenceL;
         }
 
        // Método para exibir o grafo no formato DOT

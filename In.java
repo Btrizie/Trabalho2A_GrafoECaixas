@@ -175,11 +175,6 @@ public final class In {
                 url = getClass().getClassLoader().getResource(name);
             }
 
-            // or URL from web
-            if (url == null) {
-                url = new URL(name);
-            }
-
             URLConnection site = url.openConnection();
 
             // in order to set User-Agent, replace above line with these two

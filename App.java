@@ -6,11 +6,11 @@ public class App {
     public static void main(String[] args) throws FileNotFoundException {
         // pegar a file com as dimensões
         String fileName = "testeG.txt";
-        // dicionario com as dimensões
+        // Cataloga as dimensões em uma lista
         List<int[]> boxes = readBoxes(fileName);
         // acha a maior sequência
-        int longestSequence = findLongestNestingSequence(boxes);
-        System.out.println("The longest nesting sequence length is: " + longestSequence);
+        int depthGraph = depthGraph(boxes);
+        System.out.printf("A maior sequência de caixas é: %d \n\n",depthGraph );
 
         // Exibir o grafo no formato DOT
         showGraph(boxes);
@@ -34,16 +34,17 @@ public class App {
             // adiciona na lista
             boxes.add(dimensions);
         }
+        myReader.close();
         return boxes;
     }
 
     // Esse método compara todas as medidas já em ordem
-    public static boolean canNest(int[] box1, int[] box2) {
+    public static boolean ifFits(int[] box1, int[] box2) {
         return box1[0] < box2[0] && box1[1] < box2[1] && box1[2] < box2[2];
     }
 
     // Acha a maior sequência
-    public static int findLongestNestingSequence(List<int[]> boxes) {
+    public static int depthGraph(List<int[]> boxes) {
         int n = boxes.size();
 
         // Inicializa o grafo
@@ -51,10 +52,10 @@ public class App {
 
         // Adiciona as caixas no grafo
         for (int i = 0; i < n; i++) {
-            System.out.println("A caixa de dimensões: " + Arrays.toString(boxes.get(i)));
+            System.out.println("A caixa "+i+" de dimensões: " + Arrays.toString(boxes.get(i)));
             for (int j = 0; j < n; j++) {
-                if (i != j && canNest(boxes.get(i), boxes.get(j))) {
-                    System.out.println("Cabe dentro da caixa"+j+": " + Arrays.toString(boxes.get(j)));
+                if (i != j && ifFits(boxes.get(i), boxes.get(j))) {
+                    System.out.println("Cabe dentro da caixa "+j+": " + Arrays.toString(boxes.get(j)));
                     graph.addEdge(i, j);
                 }
             }
@@ -62,19 +63,19 @@ public class App {
         }
 
         // Encontra o caminho mais longo no grafo utilizando a classe DephtFirstSearch
-        int maxSequenceLength = 0;
+        int maxSequenceL = 0;
         for (int i = 0; i < n; i++) {
-            DepthFirstSearch16 dfs = new DepthFirstSearch16(graph, i);
+            DepthFirstSearch dfs = new DepthFirstSearch(graph, i);
             for (int j = 0; j < n; j++) {
                 if (dfs.hasPathTo(j)) {
                     ArrayList<Integer> path = dfs.pathTo(j);
-                    if (path != null && path.size() > maxSequenceLength) {
-                        maxSequenceLength = path.size();
+                    if (path != null && path.size() > maxSequenceL) {
+                        maxSequenceL = path.size();
                     }
                 }
             }
         }
-        return maxSequenceLength;
+        return maxSequenceL;
     }
 
 
@@ -85,7 +86,7 @@ public class App {
         // Adiciona as caixas no grafo
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (i != j && canNest(boxes.get(i), boxes.get(j))) {
+                if (i != j && ifFits(boxes.get(i), boxes.get(j))) {
                     graph.addEdge(i, j);
                 }
             }

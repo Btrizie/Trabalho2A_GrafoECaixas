@@ -10,20 +10,20 @@ public class MainApp2 {
 
         while (!loop.equals("a")) {
             System.out.printf("---Leitura[%d] de casos---\n", count);
-            System.out.print("Insira qual caso deseja verificar (ex: nome.txt): ");
+            System.out.println("Insira qual caso deseja verificar (ex: nome.txt): ");
             fileName = in.nextLine();
 
             // Chama os métodos da classe App2
             Map<Integer, int[]> boxes = App2.readBoxes(fileName);
-            int longestSequence = App2.depht(boxes);
-            System.out.println("The longest nesting sequence length is: " + longestSequence);
+            int longestS = App2.depthGraph(boxes);
+            System.out.println("A maior sequência de caixas é: " + longestS);
             //App2.showGraph(boxes);
 
             System.out.printf("\nO que deseja fazer a seguir?\n  (a)sair\n  (b)verificar novamente\n");
             loop = in.nextLine();
             count++;
         }
-
+        in.close();
     }
 }
 
