@@ -1,16 +1,23 @@
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class App {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         // pegar a file com as dimensões
-        String fileName = "CatalogoG.txt";
+        String fileName = "CatalogoP.txt";
         // Cataloga as dimensões em uma lista
+        long startTime = System.nanoTime();
+        TimeUnit.SECONDS.sleep(5);
         List<int[]> boxes = readBoxes(fileName);
         // acha a maior sequência
         int depthGraph = depthGraph(boxes);
+        long endTime = System.nanoTime();
         System.out.printf("A maior sequência de caixas é: %d \n\n",depthGraph );
+        
+        double timeElapsed = endTime - startTime;
+        System.out.println("Execução do programa em milissegundos: " + timeElapsed / 1000000);
 
         // Exibir o grafo no formato DOT
         showGraph(boxes);
