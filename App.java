@@ -40,8 +40,19 @@ public class App {
 
     // Esse método compara todas as medidas já em ordem
     public static boolean ifFits(int[] box1, int[] box2) {
-        return box1[0] < box2[0] && box1[1] < box2[1] && box1[2] < box2[2];
-    }
+            if (box1[0] >= box2[0]) {
+                return false;
+            }
+            if (box1[1] >= box2[1]) {
+                return false;
+            }
+            if (box1[2] >= box2[2]) {
+                return false;
+            }
+            return true;
+        }
+
+
 
     // Acha a maior sequência
     public static int depthGraph(List<int[]> boxes) {
