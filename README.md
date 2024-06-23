@@ -18,8 +18,31 @@ O algortimo se propõe a fazer:
    Após ordenar as dimensões de cada caixa, o algoritmo verifica a possibilidade de encaixar as caixas entre si.
 ### 3. Construção do Grafo Direcionado <br/>
    O algoritmo constrói um grafo direcionado _(Diagraph)_ que representa as relações de encaixe entre as caixas. Neste contexto, uma caixa maior não pode ser encaixada em uma caixa menor, portanto, as relações são unidirecionais. As caixas são representadas por vértices e as arestas as conexões que indicam a possibilidade de uma caixa entrar dentro de outra. Por exemplo, se a caixa **1** pode ser encaixada dentro da caixa **2**, uma aresta será criada direcionada do vértice **1** para o vértice **2**.
-### 4. Busca pela Maior Sequência de Encaixe
+### 4. Busca pela Maior Sequência de Encaixe <br/>
    O algoritmo procura a maior sequencia de encaixe dentro do grafo, utilizando busca em profundidade _(DepthFirstSearch)_. A sequência é definido pelo caminho mais longo no grafo.
-### 5. Vizualização do Grafo
+### 5. Vizualização do Grafo <br/>
    Para permitir uma melhor compreensão das relações de encaixe entre as caixas, o algoritmo gera uma representaçãao visual no formato DOT, que pode ser utulizada em ferramentas como [WebGraphViz](http://www.webgraphviz.com/).
 
+## Instruções para Uso
+### 1. Pré-requisitos
+   * Jav development Kit _(JDK)_ instalado
+   * Arquivo de texto _(.txt)_ contendo as três dimensões das caixas, com cada linha representando uma caixa e as dimensões separadas por espaços. Exemplo:
+   ```
+   19 29 90
+   23 15 87
+   ```
+### 2. Compilação e Execução
+   2.1 Compile o código Java:
+   ```
+   javac MainApp2.java
+   ```
+   2.2 Execute o programa, passando o nome da Main:
+   ```
+   javac MainApp2
+   ```
+   2.3 O programa irá inciar, passe o nome com a extensão do arquivo de texto que gostaria de ler.
+   ```
+   catalgoP.txt
+   ```
+
+Este algoritmo é eficiente para resolver o problema de encaixe de caixas, utilizando técnicas de grafos e busca em profundidade para encontrar a solução.
