@@ -1,10 +1,9 @@
 import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class MainApp2 {
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(System.in);
         String fileName, loop = " ";
         int count = 1;
@@ -18,15 +17,7 @@ public class MainApp2 {
             Map<Integer, int[]> boxes = App2.readBoxes(fileName);
             int longestS = App2.depthGraph(boxes);
             System.out.println("A maior sequência de caixas é: " + longestS);
-
-            long startTime = System.nanoTime();
-            TimeUnit.SECONDS.sleep(5);
-            long endTime = System.nanoTime();
-            double timeElapsed = endTime - startTime;
-
-            System.out.println("Execução do programa em milissegundos: " + timeElapsed / 1000000);
-
-
+            //App2.showGraph(boxes);
 
             System.out.printf("\nO que deseja fazer a seguir?\n  (a)sair\n  (b)verificar novamente\n");
             loop = in.nextLine();
