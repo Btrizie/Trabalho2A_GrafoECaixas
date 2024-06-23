@@ -31,18 +31,6 @@ O algortimo se propõe a fazer:
    19 29 90
    23 15 87
    ```
-### 2. Compilação e Execução
-   2.1 Compile o código Java:
-   ```
-   javac MainApp2.java
-   ```
-   2.2 Execute o programa, passando o nome da Main:
-   ```
-   javac MainApp2
-   ```
-   2.3 O programa irá inciar, passe o nome com a extensão do arquivo de texto que gostaria de ler.
-   ```
-   catalgoP.txt
-   ```
 
-Este algoritmo é eficiente para resolver o problema de encaixe de caixas, utilizando técnicas de grafos e busca em profundidade para encontrar a solução.
+### Desenvolvedores
+[Beatriz Cavalari](https://github.com/Btrizie) e [Luisa Scolari](https://github.com/luscolari)
