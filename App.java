@@ -5,7 +5,7 @@ public class App {
 
     public static void main(String[] args) throws FileNotFoundException {
         // pegar a file com as dimensões
-        String fileName = "testeG.txt";
+        String fileName = "CatalogoG.txt";
         // Cataloga as dimensões em uma lista
         List<int[]> boxes = readBoxes(fileName);
         // acha a maior sequência
@@ -38,22 +38,6 @@ public class App {
         return boxes;
     }
 
-    // Esse método compara todas as medidas já em ordem
-    public static boolean ifFits(int[] box1, int[] box2) {
-            if (box1[0] >= box2[0]) {
-                return false;
-            }
-            if (box1[1] >= box2[1]) {
-                return false;
-            }
-            if (box1[2] >= box2[2]) {
-                return false;
-            }
-            return true;
-        }
-
-
-
     // Acha a maior sequência
     public static int depthGraph(List<int[]> boxes) {
         int n = boxes.size();
@@ -65,8 +49,8 @@ public class App {
         for (int i = 0; i < n; i++) {
             System.out.println("A caixa "+i+" de dimensões: " + Arrays.toString(boxes.get(i)));
             for (int j = 0; j < n; j++) {
-                if (i != j && ifFits(boxes.get(i), boxes.get(j))) {
-                    System.out.println("Cabe dentro da caixa "+j+": " + Arrays.toString(boxes.get(j)));
+                if (i != j && boxes.get(i)[0] < boxes.get(j)[0] && boxes.get(i)[1] < boxes.get(j)[1] && boxes.get(i)[2] < boxes.get(j)[2]) {
+                    System.out.println("Cabe dentro da caixa "+j+": " +     Arrays.toString(boxes.get(j)));
                     graph.addEdge(i, j);
                 }
             }
@@ -97,7 +81,7 @@ public class App {
         // Adiciona as caixas no grafo
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (i != j && ifFits(boxes.get(i), boxes.get(j))) {
+                if (i != j && boxes.get(i)[0] < boxes.get(j)[0] && boxes.get(i)[1] < boxes.get(j)[1] && boxes.get(i)[2] < boxes.get(j)[2]) {
                     graph.addEdge(i, j);
                 }
             }
