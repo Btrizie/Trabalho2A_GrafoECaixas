@@ -32,7 +32,6 @@ public class MainApp2 {
             count++;
         }
         in.close();
-        System.out.println("Teste, vou apagar!");
     }
 }
 
