@@ -6,7 +6,7 @@ Este projeto implementa um algoritmo para determina se uma quantidade de caixas 
 
 ## Estrutura do Projeto
 Esses são as principais classes do projeto:
-* App2.java
+* App3.java
 * Diagraph.java
 * DepthFirstSearch.java
 

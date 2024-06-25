@@ -6,7 +6,7 @@ public class App {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         // pegar a file com as dimensões
-        String fileName = "CatalogoP.txt";
+        String fileName = "CatalogoG.txt";
         // Cataloga as dimensões em uma lista
         long startTime = System.nanoTime();
         TimeUnit.SECONDS.sleep(5);

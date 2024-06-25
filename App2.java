@@ -1,8 +1,25 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class App2 {
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+        // pegar a file com as dimensões
+        String fileName = "CatalogoGG.txt";
+        // Cataloga as dimensões em uma lista
+        long startTime = System.nanoTime();
+        TimeUnit.SECONDS.sleep(5);
+        Map<Integer, int[]> boxes = readBoxes(fileName);
+        // acha a maior sequência
+        int depthGraph = depthGraph(boxes);
+        long endTime = System.nanoTime();
+        System.out.printf("A maior sequência de caixas é: %d \n\n",depthGraph );
+
+        double timeElapsed = endTime - startTime;
+        System.out.println("Execução do programa em milissegundos: " + timeElapsed / 1000000);
+
+    }
 
         // método que ordena e cataloga as dimensões
         public static Map<Integer, int[]> readBoxes(String fileName) throws FileNotFoundException {
@@ -41,14 +58,11 @@ public class App2 {
 
             // Adiciona as caixas no grafo
             for (int i = 0; i < n; i++) {
-                System.out.println("A caixa "+i+" de dimensões: " + Arrays.toString(boxes.get(i)));
                 for (int j = 0; j < n; j++) {
                     if (i != j && ifFits(boxes.get(i), boxes.get(j))) {
-                        System.out.println("Cabe dentro da caixa "+j+": " + Arrays.toString(boxes.get(j)));
                         graph.addEdge(i, j);
                     }
                 }
-                System.out.println("------");
             }
             //Apresenta o grafo e suas relações
             printGraph(graph);
@@ -69,12 +83,13 @@ public class App2 {
             return maxSequenceL;
         }
 
-       // Método para exibir o grafo no formato DOT
+        // Método para exibir o grafo no formato DOT
         //Acessar o site http://www.webgraphviz.com/
         public static void printGraph(Digraph digraph) {
             String dotRepresentation = digraph.toDot();
             System.out.println(dotRepresentation);
         }
     }
+
 
 
